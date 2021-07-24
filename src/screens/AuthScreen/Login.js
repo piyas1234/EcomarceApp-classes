@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Alert, StyleSheet, Text, View} from 'react-native';
 import {Input} from 'react-native-elements';
 import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -10,6 +10,8 @@ import {FromValidator} from './Validation';
 
 const Login = () => {
   const {Auth, setAuth} = useContext(DataManger)
+  const [loading, setLoading] = useState(false)
+  const [errmsg, seterrMsg] = useState("")
   const [input, setInput] = useState({
     email: '',
     password: '',
@@ -19,24 +21,38 @@ const Login = () => {
 
   console.log(input);
 
-  const onPressHandler = async () => {
-     try{
-      
+  const onPressHandler =   async () => {
       await FromValidator(input, setMsg);
-
-      const Data = await Api.post('/auth/login', input)
-      await setAuth(Data.data)
-     }
-     catch(err){
-       console.log(err)
-     }
+       
+       await ServerRequest()
+            
+      
+    
   
      
     
   };
 
 
-  console.warn(Auth);
+  const ServerRequest =  async () =>{
+    try{
+      await setLoading(true)
+      const Data = await Api.post('/auth/login', input)
+      await setAuth(Data.data)
+      await setLoading(false)
+     }
+     catch(err){
+       console.log(err)
+       setLoading(false)
+       seterrMsg("Email or password is wrong!!")
+     }
+   }
+
+ if(errmsg){
+  Alert.alert(errmsg)
+  seterrMsg("")
+ }
+   
 
   return (
     <View style={styles.main}>
@@ -67,7 +83,8 @@ const Login = () => {
         />
       </View>
 
-      <Button onPress={onPressHandler} title="Login" />
+       {!loading && <Button   onPress={onPressHandler} title="Login" />}
+      {loading &&  <Button  loading onPress={onPressHandler} title="Login" />}
     </View>
   );
 };
