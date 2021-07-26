@@ -1,5 +1,5 @@
 import React, {createContext, useEffect, useState} from 'react';
-import Api from '../Api/Api';
+import {Api , Api2} from '../Api/Api';
 
 export const DataManger = createContext();
 

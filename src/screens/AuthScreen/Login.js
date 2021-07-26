@@ -3,15 +3,14 @@ import {Alert, StyleSheet, Text, View} from 'react-native';
 import {Input} from 'react-native-elements';
 import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Api from '../../global/Api/Api';
-import { DataManger } from '../../global/Context/Context';
+import {Api2} from '../../global/Api/Api';
+import {DataManger} from '../../global/Context/Context';
 import {FromValidator} from './Validation';
 
-
 const Login = () => {
-  const {Auth, setAuth} = useContext(DataManger)
-  const [loading, setLoading] = useState(false)
-  const [errmsg, seterrMsg] = useState("")
+  const {Auth, setAuth} = useContext(DataManger);
+  const [loading, setLoading] = useState(false);
+  const [errmsg, seterrMsg] = useState('');
   const [input, setInput] = useState({
     email: '',
     password: '',
@@ -21,38 +20,29 @@ const Login = () => {
 
   console.log(input);
 
-  const onPressHandler =   async () => {
-      await FromValidator(input, setMsg);
-       
-       await ServerRequest()
-            
-      
-    
-  
-     
-    
+  const onPressHandler = async () => {
+    await FromValidator(input, setMsg);
+
+    await ServerRequest();
   };
 
+  const ServerRequest = async () => {
+    try {
+      await setLoading(true);
+      const Data = await Api2.post('/auth/login', input);
+      await setAuth(Data.data);
+      await setLoading(false);
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
+      seterrMsg('Email or password is wrong!!');
+    }
+  };
 
-  const ServerRequest =  async () =>{
-    try{
-      await setLoading(true)
-      const Data = await Api.post('/auth/login', input)
-      await setAuth(Data.data)
-      await setLoading(false)
-     }
-     catch(err){
-       console.log(err)
-       setLoading(false)
-       seterrMsg("Email or password is wrong!!")
-     }
-   }
-
- if(errmsg){
-  Alert.alert(errmsg)
-  seterrMsg("")
- }
-   
+  if (errmsg) {
+    Alert.alert(errmsg);
+    seterrMsg('');
+  }
 
   return (
     <View style={styles.main}>
@@ -61,19 +51,15 @@ const Login = () => {
         <Text style={styles.titleText}>Login User</Text>
       </View>
       <View>
-       
         <Input
           placeholder="Enter Your Email"
           leftIcon={{type: 'AntDesign', name: 'mail'}}
           style={styles}
           onChangeText={text => setInput({...input, email: text})}
-          errorMessage = {msg.emailMsg} 
-           
+          errorMessage={msg.emailMsg}
         />
-        
       </View>
       <View>
-        
         <Input
           leftIcon={{type: 'font-awesome', name: 'key'}}
           placeholder="Enter Your Password"
@@ -83,8 +69,8 @@ const Login = () => {
         />
       </View>
 
-       {!loading && <Button   onPress={onPressHandler} title="Login" />}
-      {loading &&  <Button  loading onPress={onPressHandler} title="Login" />}
+      {!loading && <Button onPress={onPressHandler} title="Login" />}
+      {loading && <Button loading onPress={onPressHandler} title="Login" />}
     </View>
   );
 };
