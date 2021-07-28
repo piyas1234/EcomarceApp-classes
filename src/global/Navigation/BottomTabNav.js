@@ -10,6 +10,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {DataManger} from '../Context/Context';
 import {Avatar, Badge, Icon, withBadge} from 'react-native-elements';
+import StackNavigator from './StackNavigation';
 const BottomTabNav = () => {
   const Tab = createMaterialBottomTabNavigator();
   const {cart, setCart} = useContext(DataManger);
@@ -22,7 +23,7 @@ const BottomTabNav = () => {
       <Tab.Navigator activeColor="tomato" barStyle={{backgroundColor: 'white'}}>
         <Tab.Screen
           name="Home"
-          component={HomeScreen}
+          component={StackNavigator}
           options={{
             tabBarLabel: 'Home',
             tabBarIcon: ({color}) => (

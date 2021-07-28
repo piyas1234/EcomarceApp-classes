@@ -3,7 +3,7 @@ import { FlatList, StyleSheet, Text, View , Image, Button } from 'react-native'
 import CartCard from '../../global/Components/Card/CartCard'
 import { DataManger } from '../../global/Context/Context'
 
-const CartScreen = () => {
+const ProductsSceeen = () => {
 
     const {cart , setCart} = useContext(DataManger)
     return cart.length > 0 ?  (
@@ -27,7 +27,7 @@ const CartScreen = () => {
 
 }
 
-export default CartScreen
+export default ProductsSceeen
 
 const styles = StyleSheet.create({
 

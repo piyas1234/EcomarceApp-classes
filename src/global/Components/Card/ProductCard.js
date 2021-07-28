@@ -7,8 +7,8 @@ import { DataManger } from '../../Context/Context';
 const ProductCard = ({item}) => {
 
 
-    const {cart, setCart} = useContext(DataManger)
-    console.log(cart)
+  const {cart, setCart} = useContext(DataManger)
+  console.log(cart)
   console.log(item);     
   
   
@@ -20,10 +20,10 @@ const ProductCard = ({item}) => {
   return (
     <View style={styles.main} >
       <View  style={styles.subMain} >
-      <Image source={{uri: item.image}} style={{width: 200, height: 200}} />
-      <Text style={styles.title}>{item.title.slice(0,10)}</Text>
+      <Image source={{uri: item.image}} style={{width:'100%', height:140,resizeMode:'contain'}} />
+      <Text style={styles.title}>{item.name.slice(0,10)}</Text>
       <View style={styles.button}>
-      <Button type="outline"   title= {`Price $ ${item.price} `}  />
+      <Button type="outline"   title= {`Price $ ${item.real_price} `}  />
     <Button onPress={()=>onPressHandeler(item)} title="Add cart" />
       </View>
       </View>

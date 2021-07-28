@@ -11,11 +11,12 @@ const CartCard = ({item}) => {
     const newCart = cart.filter(item => item._id !== id);
     setCart(newCart);
   };
+
   return  (
     <View style={styles.main}>
-      <Text style={styles.title}>{item.title}</Text>
+      <Text style={styles.title}>{item.name.slice(0,8)}</Text>
       <Image style={styles.image} source={{uri: item.image}} />
-      <Text style={styles.title}>{item.price}</Text>
+      <Text style={styles.title}>{item.real_price}</Text>
       <Button
         type="outline"
         icon={<MaterialCommunityIcons name="delete" size={24} color="red" />}
