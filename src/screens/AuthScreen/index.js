@@ -15,7 +15,7 @@ const AuthScreen = () => {
 
 
     const {Auth} = useContext(DataManger)
-    console.warn(Auth)
+    
     return Auth?.auth===false ? (
          <Tab.Navigator initialRouteName="Login">
              <Tab.Screen name="Login" component={Login} />

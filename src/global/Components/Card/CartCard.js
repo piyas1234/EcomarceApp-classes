@@ -6,7 +6,7 @@ import {DataManger} from '../../Context/Context';
 
 const CartCard = ({item}) => {
   const {cart, setCart} = useContext(DataManger);
-  console.warn(cart.length)
+ 
   const onPressHandeler = id => {
     const newCart = cart.filter(item => item._id !== id);
     setCart(newCart);

@@ -5,21 +5,24 @@ import Category from './Category';
 import {DataManger} from '../../global/Context/Context';
 
 const Header = () => {
-  const {category, brand} = useContext(DataManger);
+  const {category, brand , slider} = useContext(DataManger);
   return (
     <View>
-      <Slider />
+      {slider.length>0 &&  <Slider slider={slider} />}
+      {brand.length>0 &&  
+      
       <SectionList
         sections={[
           {title: 'Categories', data: [category]},
           {title: 'brands', data: [brand]},
+          {title: 'All Products', data: []},
         ]}
         keyExtractor={(item, index) => item + index}
-        renderItem={(item) => <Category data={item}    />}
+        renderItem={(item) => <Category   data={item}    />}
         renderSectionHeader={({section: {title}}) => (
           <Text style={styles.header}>{title}</Text>
         )}
-      />
+      />}
     </View>
   );
 };

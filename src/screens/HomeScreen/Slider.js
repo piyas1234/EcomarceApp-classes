@@ -5,9 +5,8 @@ import { Image } from 'react-native-elements/dist/image/Image';
 import {SwiperFlatList} from 'react-native-swiper-flatlist';
 import { DataManger } from '../../global/Context/Context';
  
-const Slider = () => {
+const Slider = ({slider}) => {
 
-  const {slider} = useContext(DataManger)
    
 
   return (

@@ -5,8 +5,8 @@ import { DataManger } from '../../global/Context/Context'
 
 const ProductsSceeen = () => {
 
-    const {cart , setCart} = useContext(DataManger)
-    return cart.length > 0 ?  (
+    const {cart } = useContext(DataManger)
+    return cart?.length > 0 ?  (
         <View>
             <Button title="Process to checkout" /> 
            <FlatList

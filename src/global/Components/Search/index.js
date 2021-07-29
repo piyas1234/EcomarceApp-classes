@@ -1,5 +1,4 @@
 import React, {useContext, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
 import SearchBar from 'react-native-elements/dist/searchbar/SearchBar-ios';
 import {DataManger} from '../../Context/Context';
 
@@ -12,10 +11,14 @@ const Search = () => {
     
 
         <SearchBar
+          containerStyle={{
+             
+          }}
           inputContainerStyle={{
             backgroundColor: '#d3dfe6',
             borderWidth: 1,
             borderColor: 'gray',
+            height:40
           }}
           placeholder="search product..."
           onChangeText={text => setSearch(text)}

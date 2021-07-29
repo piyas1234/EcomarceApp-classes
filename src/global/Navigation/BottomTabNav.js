@@ -1,26 +1,55 @@
-import {NavigationContainer} from '@react-navigation/native';
+ 
 import React, {useContext} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import AuthScreen from '../../screens/AuthScreen';
-import CartScreen from '../../screens/CartScreen';
-import HomeScreen from '../../screens/HomeScreen';
 import ProductDetailsScreen from '../../screens/ProductDetailsScreen/index';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {DataManger} from '../Context/Context';
-import {Avatar, Badge, Icon, withBadge} from 'react-native-elements';
+import {Badge, Header, Icon} from 'react-native-elements';
 import StackNavigator from './StackNavigation';
-const BottomTabNav = () => {
+import ProductsSceeen from '../../screens/ProductsSceeen';
+const BottomTabNav = ({navigation}) => {
   const Tab = createMaterialBottomTabNavigator();
-  const {cart, setCart} = useContext(DataManger);
+  const {cart } = useContext(DataManger);
   const cartLength = cart.length;
+  const {headerNavigator, DrawerNavigator} = useContext(DataManger);
+  const onPressHandler = () => {
+    headerNavigator.navigate('DrawerNavigator');
+    DrawerNavigator?.toggleDrawer();
+  };
 
-
-  
   return (
-    <NavigationContainer>
-      <Tab.Navigator activeColor="tomato" barStyle={{backgroundColor: 'white'}}>
+    <>
+      <Header
+        placement="left"
+        backgroundColor="#00d5ff"
+        leftComponent={
+          <TouchableOpacity onPress={() => onPressHandler()}>
+            <Text>
+              <Icon type="material" name="menu" color="white" />
+            </Text>
+          </TouchableOpacity>
+        }
+        centerComponent={{
+          text: 'E SHOP BD',
+          style: {color: '#fff', fontWeight: 'bold'},
+        }}
+        rightComponent={
+          <TouchableOpacity
+            onPress={() => headerNavigator.navigate('HomeScreen')}>
+            <Text>
+              <Icon name="home" type="material" color="white" />
+            </Text>
+          </TouchableOpacity>
+        }
+      />
+
+      <Tab.Navigator
+        activeColor="#ff9500"
+        inactiveColor="white"
+        barStyle={{backgroundColor: '#00d5ff'}}>
         <Tab.Screen
           name="Home"
           component={StackNavigator}
@@ -44,13 +73,13 @@ const BottomTabNav = () => {
 
         <Tab.Screen
           name="Cart"
-          component={CartScreen}
+          component={ProductsSceeen}
           options={{
             tabBarLabel: 'Cart',
             tabBarIcon: ({color}) => (
               <>
                 <Badge
-                  status="error"
+                  status="warning"
                   value={cartLength}
                   containerStyle={{position: 'absolute', top: -15, right: -10}}
                 />
@@ -75,10 +104,8 @@ const BottomTabNav = () => {
           }}
         />
       </Tab.Navigator>
-    </NavigationContainer>
+    </>
   );
 };
 
 export default BottomTabNav;
-
-const styles = StyleSheet.create({});
