@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Api2} from '../Api/Api';
 
 export const SearchProduct = async (setSearchResult, search) => {
@@ -36,9 +37,9 @@ export const LoadProduct = async (
   try {
     await setProductLoading(true);
     const ProductData = await Api2.get(
-      `/product?page=${productCurrentPage}&&limit=4`,
+      `/product?page=${productCurrentPage}&&limit=2`,
     );
-    await setProducts(products.concat(ProductData.data.products));
+    await setProducts((product)=>product.concat(ProductData.data.products));
     await setProductLoading(false);
   } catch (err) {
     console.log(err);
@@ -59,4 +60,13 @@ export const LoadSlider = async setSlider => {
   } catch (err) {
     console.log(err);
   }
+};
+
+
+
+ export const getAuthData = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem('auth');
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (e) {}
 };

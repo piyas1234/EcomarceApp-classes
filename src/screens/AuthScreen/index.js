@@ -4,15 +4,15 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import Login from './Login';
 import SignUp from './SignUp';
 import { DataManger } from '../../global/Context/Context';
-import Profile from './Profile';
-import Setting from './Setting';
-import DeshBoard from './DeshBoard';
+ 
+import CateGoryList from './CateGoryList';
+import BrandList from './BrandList';
+import ProductsList from './ProductsList';
 
 const Tab = createMaterialTopTabNavigator();
 
 
 const AuthScreen = () => {
-
 
     const {Auth} = useContext(DataManger)
     
@@ -24,9 +24,9 @@ const AuthScreen = () => {
     ):
     (
         <Tab.Navigator  >
-            <Tab.Screen name="Profile" component={Profile} />
-            <Tab.Screen name="Setting" component={Setting} />
-            <Tab.Screen name="Deshboard" component={DeshBoard} />
+            <Tab.Screen name="CateGoryList" component={CateGoryList} />
+            <Tab.Screen name="BrandList" component={BrandList} />
+            <Tab.Screen name="ProductsList" component={ProductsList} />
         </Tab.Navigator>
    )
 }

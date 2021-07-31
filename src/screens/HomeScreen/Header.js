@@ -1,11 +1,11 @@
-import React, {useContext} from 'react';
+import React  from 'react';
 import {SectionList, StyleSheet, Text, View} from 'react-native';
  import Slider from './Slider';
 import Category from './Category';
-import {DataManger} from '../../global/Context/Context';
+ 
 
-const Header = () => {
-  const {category, brand , slider} = useContext(DataManger);
+const Header = ({data}) => {
+  const {category, brand , slider} = data;
   return (
     <View>
       {slider.length>0 &&  <Slider slider={slider} />}

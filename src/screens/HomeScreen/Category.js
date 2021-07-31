@@ -1,11 +1,11 @@
 import React from 'react'
-import { FlatList, Image, ImageStore, StyleSheet, Text, View } from 'react-native'
+import { FlatList , View } from 'react-native'
 import CategoryCard from '../../global/Components/Card/CategoryCard'
 
 
 
 const Category = ({ data }) => {
-     console.log(data)
+     
     return (
         <View>
             <FlatList 

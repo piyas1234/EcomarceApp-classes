@@ -11,7 +11,7 @@ function Feed({navigation}) {
         setDrawerNavigator(navigation)
     }, [refresh])
 
-    console.warn(DrawerNavigator)
+    
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text>Feed Screen</Text>

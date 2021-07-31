@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {Api2} from '../../global/Api/Api';
 import {DataManger} from '../../global/Context/Context';
 import {FromValidator} from './Validation';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = () => {
   const {Auth, setAuth} = useContext(DataManger);
@@ -30,6 +31,7 @@ const Login = () => {
     try {
       await setLoading(true);
       const Data = await Api2.post('/auth/login', input);
+      await storeData(Data.data)
       await setAuth(Data.data);
       await setLoading(false);
     } catch (err) {
@@ -38,6 +40,17 @@ const Login = () => {
       seterrMsg('Email or password is wrong!!');
     }
   };
+
+
+
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value)
+      await AsyncStorage.setItem('auth', jsonValue)
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   if (errmsg) {
     Alert.alert(errmsg);
