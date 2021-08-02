@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { Text,  View,  Modal,  Pressable, } from 'react-native';
+import AddCategoryForm from '../Form/AddCategoryForm';
 import AddProductForm from '../Form/AddProductForm';
 import styles from './styles';
 
@@ -27,6 +28,7 @@ const AddProduct = ({type}) => {
 
 
                 {type==="addproduct" &&<AddProductForm/>}
+                {type==="category" && <AddCategoryForm/>}
 
 
 

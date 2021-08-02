@@ -26,7 +26,7 @@ const CateGoryList = () => {
           <Text style={styles.title}>{item.name.slice(0, 6)}</Text>
           <Text style={styles.title}>${item.discount_price}</Text>
           <View style={styles.image}>
-            <Image style={{height: 40, width: 40}} source={{uri: item.image}} />
+            <Image style={{height: 40, width: 40, resizeMode:'contain'}} source={{uri: item.image}} />
           </View>
 
           <Button

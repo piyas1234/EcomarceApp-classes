@@ -3,16 +3,11 @@ import {StyleSheet, Text, View, ScrollView, Alert} from 'react-native';
 import {DataManger} from '../../global/Context/Context';
 import {Card, Button, Image} from 'react-native-elements';
 import {Api2} from '../../global/Api/Api';
-import { useCamera } from './../../global/Context/ImageContext';
- 
+import {useCamera} from './../../global/Context/ImageContext';
+import AddProduct from '../../global/Components/Modal/AddProduct';
 
 const CateGoryList = () => {
   const {category, setCategoryReload} = useContext(DataManger);
-  const [image, setImage] = useState('');
-
-  const onPressHandler = async ()=>{
-   await useCamera(setImage)
-  }
 
   const DeleteData = async id => {
     const response = await Api2.delete(`/category/${id}`);
@@ -22,22 +17,17 @@ const CateGoryList = () => {
 
   return (
     <ScrollView>
-      {image !== '' && (
-        <View>
-          <Image
-            style={{width: '100%', height: 200, resizeMode: 'contain'}}
-            source={{uri: image}}
-          />
-        </View>
-      )}
-      <Button onPress={onPressHandler} title="image" />
+
+      
       <Card containerStyle={{padding: 0}}>
+
+        <AddProduct type="category" />
         {category.map(item => (
           <View key={Math.random()} style={styles.card}>
             <Text style={styles.title}>{item.label}</Text>
             <View style={styles.image}>
               <Image
-                style={{height: 40, width: 40}}
+                style={{height: 40, width: 40, resizeMode: 'contain'}}
                 source={{uri: item.image}}
               />
             </View>

@@ -2,11 +2,14 @@ import React, { useContext, useEffect } from 'react';
 import {View, Text, Button} from 'react-native';
 import {createDrawerNavigator,DrawerContentScrollView,DrawerItemList,DrawerItem} from '@react-navigation/drawer';
 import { DataManger } from '../Context/Context';
+import { useNavigation } from '@react-navigation/native';
 const Drawer = createDrawerNavigator();
 
-function Feed({navigation}) {
 
-    const {refresh, DrawerNavigator, setDrawerNavigator} = useContext(DataManger)
+
+function Feed({navigation}) {
+      
+    const {refresh, setDrawerNavigator} = useContext(DataManger)
     useEffect(() => {
         setDrawerNavigator(navigation)
     }, [refresh])
@@ -21,6 +24,8 @@ function Feed({navigation}) {
   );
 }
 
+
+
 function Notifications() {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -28,6 +33,8 @@ function Notifications() {
     </View>
   );
 }
+
+
 
 function CustomDrawerContent(props) {
   return (
@@ -45,6 +52,8 @@ function CustomDrawerContent(props) {
   );
 }
 
+
+
 const DrawerNavigator = () => {
  
   return (
@@ -52,10 +61,12 @@ const DrawerNavigator = () => {
       openByDefault
       drawerType="back"
       drawerContent={props => <CustomDrawerContent {...props} />}>
-      <Drawer.Screen name="Feed" component={Feed} />
+      <Drawer.Screen  name="Feed" component={Feed} />
       <Drawer.Screen name="Notifications" component={Notifications} />
     </Drawer.Navigator>
   );
 };
+
+
 
 export default DrawerNavigator;
